@@ -36,17 +36,24 @@ const crear = (descripcion) => {
   };
   listadoPorHacer.push(actividad);
   guardarDB();
-  return actividad;
+  console.log(actividad);
 };
-const listar = () => {
+const listar = (completado = false) => {
   let listado = getListado();
   if (listado.length !== 0)
-    for (let tarea of listado) {
-      console.log("===Por-Hacer====".green);
-      console.log(tarea.id);
-      console.log(tarea.descripcion);
-      console.log("Estado: ", tarea.completado);
-      console.log("================".green);
+    if (!completado) {
+      for (let tarea of listado) {
+        listarTareaEspecifica(tarea);
+      }
+    } else {
+      let tareascompletados = listado.filter((e) => e.completado);
+      if (tareascompletados.length !== 0) {
+        for (let tarea of tareascompletados) {
+          listarTareaEspecifica(tarea);
+        }
+      } else {
+        console.log("No tareas completadas");
+      }
     }
   else console.log("No hay registros que listar".cyan);
 };
@@ -74,6 +81,13 @@ const getIndexListado = (id) => {
   let listadoPorHacer = getListado();
   let index = listadoPorHacer.findIndex((tarea) => tarea.id == id);
   return index;
+};
+const listarTareaEspecifica = (tarea) => {
+  console.log("===Por-Hacer====".green);
+  console.log(tarea.id);
+  console.log(tarea.descripcion);
+  console.log("Estado: ", tarea.completado);
+  console.log("================".green);
 };
 module.exports = {
   crear,

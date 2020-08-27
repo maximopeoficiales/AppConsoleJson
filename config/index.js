@@ -23,7 +23,9 @@ const argvs = require("yargs")
     id,
     completado,
   })
-  .command("listar", "Lista las tareas por hacer")
+  .command("listar", "Lista las tareas por hacer", {
+    completado: { type: "boolean", alias: "c", default: false },
+  })
   .command("vaciar", "vacia toda las tareas")
   .command("borrar", "borrar una tarea por id", {
     id,

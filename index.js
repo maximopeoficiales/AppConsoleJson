@@ -7,7 +7,7 @@ switch (comando) {
     porHacer.crear(argvs.descripcion);
     break;
   case "listar":
-    porHacer.listar();
+    porHacer.listar(argvs.completado);
     break;
   case "actualizar":
     porHacer.actualizar(argvs.id, argvs.completado);
